@@ -9,7 +9,8 @@ router.get("/data", async (req, res) => {
         const db = req.app.locals.db;
 
         // SPECIFIC CHANGE: Target the 'JF_censored' collection
-        const collection = db.collection("JF_censored");
+        // const collection = db.collection("JF_censored");
+        const collection = db.collection("JF_censored_NEW");
 
         // Fetch data (limiting to 100 to avoid overwhelming the browser)
         const data = await collection.find({}).toArray();

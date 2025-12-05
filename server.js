@@ -29,10 +29,10 @@ const startServer = async () => {
     // Mount the planning routes at /api/planning
     app.use("/api/planning", planningRoutes);
 
-    app.listen(PORT, () => {
-        console.log(`🚀 Server running on http://localhost:${PORT}`);
-        console.log(`📡 Access data at http://localhost:${PORT}/api/planning/data`);
+    app.listen(3000, "0.0.0.0", () => {
+        console.log("Server running on port 3000");
     });
+
 };
 
 startServer();

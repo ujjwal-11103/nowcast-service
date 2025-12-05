@@ -11,6 +11,9 @@ const PORT = process.env.PORT || 5000;
 
 // Middleware
 app.use(cors());
+
+
+
 app.use(express.json());
 
 // Initialize DB and Start Server
@@ -29,7 +32,7 @@ const startServer = async () => {
     // Mount the planning routes at /api/planning
     app.use("/api/planning", planningRoutes);
 
-    app.listen(3000, "0.0.0.0", () => {
+    app.listen(3001, "0.0.0.0", () => {
         console.log("Server running on port 3000");
     });
 

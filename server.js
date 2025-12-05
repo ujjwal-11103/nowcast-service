@@ -7,37 +7,41 @@ import planningRoutes from "./src/routes/planning.js";
 dotenv.config();
 
 const app = express();
-const PORT = 3001; // Fixed port
+const PORT = 3001;
 
-// CORS Setup - Allow ALL origins, ALL headers, ALL methods
+// =========================
+// GLOBAL CORS – ALLOW ALL
+// =========================
 app.use(
-    cors({
-        origin: "*",
-        methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-        allowedHeaders: ["Content-Type", "Authorization", "Accept"],
-        credentials: false,
-    })
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "Accept"],
+  })
 );
 
-// Handle preflight requests
-app.options("*", cors());
-
+// Parse JSON requests
 app.use(express.json());
 
-// Start Server After DB Connect
+// =========================
+// START SERVER AFTER DB
+// =========================
 const startServer = async () => {
-    const db = await connectDB();
-    app.locals.db = db;
+  const db = await connectDB();
+  app.locals.db = db;
 
-    app.get("/", (req, res) => {
-        res.send("🚀 Nowcast Planning Service (Port 3001) is Running");
-    });
+  // Test route
+  app.get("/", (req, res) => {
+    res.send("🚀 Nowcast Planning Service (Port 3001) is Running");
+  });
 
-    app.use("/api/planning", planningRoutes);
+  // API Routes
+  app.use("/api/planning", planningRoutes);
 
-    app.listen(3001, "0.0.0.0", () => {
-        console.log("Server running on port 3001");
-    });
+  // Start listener
+  app.listen(PORT, "0.0.0.0", () => {
+    console.log(`Server running on port ${PORT}`);
+  });
 };
 
 startServer();
